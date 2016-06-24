@@ -69,9 +69,10 @@ lastPage=pageAs[len(pageAs)-1].get('href')
 python3
 from bs4 import BeautifulSoup
 import requests
-r=requests.get('http://x77525.com/bbs/read.php?tid=1439639')
+r=requests.get('http://x77525.com/bbs/read.php?tid=1439867')
 soup = BeautifulSoup(r.content,'lxml')
-all_a=soup.find_all('a',class_='subject_t f14')
+divs=soup.find('div',class_='f14 mb10')
+images=divs.find_all('img')
 
 for a in all_a:
    print(a.contents[0] + ":" +self.allowed_domains[0]+ a.get('href'))
