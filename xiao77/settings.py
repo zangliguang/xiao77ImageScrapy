@@ -13,6 +13,9 @@ BOT_NAME = 'xiao77'
 
 SPIDER_MODULES = ['xiao77.spiders']
 NEWSPIDER_MODULE = 'xiao77.spiders'
+ITEM_PIPELINES = {
+    'xiao77.pipelines.imagePipLine': 300,
+}
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

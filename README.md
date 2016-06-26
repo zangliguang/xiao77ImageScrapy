@@ -124,9 +124,22 @@ def downImageViaMutiThread(filelist, DstDir):
 
 ```
 
+###Use mysql
+
+```
+mysql -u root -p
+show databases;
+use db_liguang_se;
+show tables;
+select count(*) from image_info group by image_type;
+
+
+```
 
 
 
+####备注
+title中可能含有特殊字符，转义为str后，可成功插入
 ####BaseWebSite:
 <http://x77525.com/bbs/>
 
