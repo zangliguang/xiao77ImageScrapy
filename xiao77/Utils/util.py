@@ -1,13 +1,13 @@
 import requests
 import threading
-
+import os
 
 def saveImage(imgUrl, imgName, DstDir):
+    print("保存文件:" + os.path.join(DstDir, imgName) + "\n")
     response = requests.get(imgUrl, stream=True)
     image = response.content
-    print("保存文件" + DstDir + imgName + "\n")
     try:
-        with open(DstDir + "/" + imgName, "wb") as jpg:
+        with open(os.path.join(DstDir, imgName), "wb") as jpg:
             jpg.write(image)
         return
     except IOError:

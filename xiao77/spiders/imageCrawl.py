@@ -11,7 +11,8 @@ from xiao77.items import ImageItem
 
 class ImagecrawlSpider(scrapy.Spider):
     name = "imageCrawl"
-    base_dir = 'xiao77_img/'
+    # base_dir = '/Users/zangliguang/Downloads/se_picture/'
+    base_dir = os.path.join(os.getcwd(), "se_picture")
     allowed_domains = ["http://x77525.com/bbs/"]
     start_urls = (
         'http://x77525.com/bbs/',
@@ -87,18 +88,20 @@ class ImagecrawlSpider(scrapy.Spider):
             filename = split[len(split) - 1]
             image['image_link_tail'] += ',' + filename
         # print(image)
-        yield image
-        # # 遍历所有img
+        # 遍历所有img
         # self.downLoadImage(catlog_name, images, title)
+        yield image
+
+
         pass
 
     def downLoadImage(self, catlog_name, images, title):
         i = 0
         image_list = []
-        dir_name = self.base_dir + '///' + catlog_name + '///' + title
+        dir_name = os.path.join(self.base_dir, catlog_name,title)
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
         for img in images:
             i += 1
-            if not os.path.exists(dir_name):
-                os.mkdir(self.base_dir + catlog_name + '///' + title)
             image_list.append(img.get('src'))
-        downImageViaMutiThread(image_list, self.base_dir + catlog_name + '///' + title)
+        downImageViaMutiThread(image_list, dir_name)
